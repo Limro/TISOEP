@@ -1,4 +1,8 @@
+## No pdfs
 *.pdf
+
+## Files we use
+! M_EX_wk1.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
