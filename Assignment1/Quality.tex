@@ -1,0 +1,44 @@
+%!TEX root = Main.tex
+\documentclass[Main]{subfiles}
+
+\begin{document}
+
+\section{How do you achieve the appropriate level of quality?}
+
+To maintain an appropriate level of quality there are several steps that can be taken:
+
+\begin{itemize}
+	\item Make code reviews
+	\item[] By making code reviews the quality of the code will more likely remain high.
+	This is mostly necessary because everybody makes mistake.
+	This will also prevent later discussion of why code was written as it was, and how it should be written -- thereby making the code in production the same for everyone.
+
+	\item Compare code and specifications
+	\item[] When writing code one must keep on track and not code what seems like a good idea or nifty features.
+	For each method written, the specifications must state it is needed for the product.
+	By doing this the code will remain clean and not easy to evolve to its next stage.
+
+
+	\item Make sure you follow the same code standard.
+	\item[] Select a standard the developers can follow and which ease their overall work. 
+	The project will take more than 6 months and the code will be read by almost all team members.
+	By having the same standard it will be faster for everyone to read it.
+
+	\item Make sure you test the code, test it properly, and from the beginning.
+	\item[] Every line of code is a potential disaster if written wrong.
+	Therefor the code must be tested as much as possible. 
+	This involves the levels of
+	\begin{enumerate}
+		\item Drivers to the hardware
+		\item Unit test the program
+		\item Boundary test for the drivers
+		\item Integration test of the program.
+		\item Acceptance test of the program as a whole.
+	\end{enumerate}
+	Each of these test must be performed multiple times, since small issues can arise when the later are tried.
+	The tests starts from the very beginning of the software development and should, if possible, be automated as much as possible.
+	
+\end{itemize}
+
+
+\end{document}
