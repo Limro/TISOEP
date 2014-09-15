@@ -5,7 +5,7 @@
 *.pdf
 
 ## Files we use
-! M_EX_wk1.pdf
+! M_EX_wk*.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
