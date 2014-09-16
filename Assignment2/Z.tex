@@ -27,39 +27,39 @@ HH ::= Repeat | NotRepeat \\
 MM ::= Repeat | NotRepeat \\
 Time ::= \mathbb{Z} \\
 AlarmTime ::= \mathbb{Z} \\
-Repeat ::= \{True, Flase\}
+Repeat ::= \{True, Flase\} \\
+ActivateProj : \{ True, False \} \\
+ShowDis : \{ True, False \} \\
+ShowAlm : \{ True, False \}
 \end{schema}
 
 
-\begin{schema}{ToggleDevice} % RE11
-\Delta (ON) \\
-pressed? : On
-\where
-Btn' = Btn \cup {pressed?}
-\end{schema}
+% \begin{schema}{ToggleDevice} % RE11
+% \Delta (ON) \\
+% pressed? : On
+% \where
+% Btn' = Btn \cup {pressed?}
+% \end{schema}
 
 
 \begin{schema}{ToggleProjector} % RE12
-\Delta (PRJ) \\
-pressed? : On
+\Delta (PRJ) 
 \where
-Btn' = Btn \cup {pressed?}
+ActivateProj' = ActivateProj \cup {PRJ}
 \end{schema}
 
 
 \begin{schema}{ShowDisplay} % RE13
-\Delta (TI) \\
-pressed? : On
+\Delta (TI)
 \where
-Prj' = Prj \cup {pressed?}
+ShowDis' = ShowDis \cup {TI}
 \end{schema}
 
 
-\begin{schema}{ShowAlarm} % RE14
-\Delta (ALM) \\
-pressed? : On
+\begin{schema}{ShowDisplay} % RE14
+\Delta (ALM)
 \where
-Prj' = Prj \cup {pressed?}
+ShowAlm' = ShowAlm \cup {ALM}
 \end{schema}
 
 \begin{schema}{SetAlarm} % 
