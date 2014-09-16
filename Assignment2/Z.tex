@@ -7,24 +7,31 @@
 \section{State and basic operations in Z.}
 
 Requirement 5:
-\begin{schema}{UseStroboscope}
-AsDs ::= ActivateStroboscope | DeactivateStroboscope \\
-AsDs :
-AbAs ::= AlarmBeep | AlarmSilent
-\Delta (AbAs)
-\where
-AsDs' = 
-\end{schema}
+% \begin{schema}{UseStroboscope}
+% AsDs ::= ActivateStroboscope | DeactivateStroboscope \\
+% AsDs :
+% AbAs ::= AlarmBeep | AlarmSilent
+% \Delta (AbAs)
+% \where
+% AsDs' = 
+% \end{schema}
 
-\begin{schema}{}
+\begin{schema}{Alarm}
 ON ::= On | Off  \\
 PRJ ::= On | Off \\
-TI ::= show  \\
-SET ::= ChangeTime | ChangeAlarm | SaveAlarm | SaveTime \\
-RPT ::= Repeat | RepeatNot
+TI ::= Pressed | NotPressed \\
+ALM ::= Pressed | NotPressed \\
+SET ::= Pressed | NotPressed \\
+RPT ::= Repeat | NotRepeat \\
+HH ::= Repeat | NotRepeat \\
+MM ::= Repeat | NotRepeat \\
+Time ::= \mathbb{Z} \\
+AlarmTime ::= \mathbb{Z} \\
+Repeat ::= \{True, Flase\}
 \end{schema}
 
-\begin{schema}{ToggleDevice}
+
+\begin{schema}{ToggleDevice} % RE11
 \Delta (ON) \\
 pressed? : On
 \where
@@ -32,13 +39,67 @@ Btn' = Btn \cup {pressed?}
 \end{schema}
 
 
+\begin{schema}{ToggleProjector} % RE12
+\Delta (PRJ) \\
+pressed? : On
+\where
+Btn' = Btn \cup {pressed?}
+\end{schema}
 
 
+\begin{schema}{ShowDisplay} % RE13
+\Delta (TI) \\
+pressed? : On
+\where
+Prj' = Prj \cup {pressed?}
+\end{schema}
 
 
+\begin{schema}{ShowAlarm} % RE14
+\Delta (ALM) \\
+pressed? : On
+\where
+Prj' = Prj \cup {pressed?}
+\end{schema}
+
+\begin{schema}{SetAlarm} % 
+\Delta (SET, ALM) \\
+canSet : \{True, False\} \\
+pressHH ::= pressed | notPressed \\
+pressMM ::= pressed | notPressed \\
+pressRPT ::= Repeat | notRepeat \\
+\where
+canSet = True \Rightarrow \\
+\hspace{20pt} SET \wedge ALM = pressed \\
+Alarm = pressHH \cup pressMM \\
+Repeat = pressRPT
+\end{schema}
+
+\begin{schema}{SetTime} % RE15
+\Delta (SET, ALM) \\
+canSet : \{True, False\} \\
+pressHH ::= pressed | notPressed \\
+pressMM ::= pressed | notPressed \\
+%pressRPT ::= Repeat | notRepeat \\
+\where
+canSet = True \Rightarrow \\
+\hspace{20pt} SET \wedge ALM = pressed \\
+Time = pressHH \cup pressMM \\
+%Repeat = pressRPT
+\end{schema}
+
+\begin{schema}{SoundAlarm}
+\Delta (Time) \\
+SoundAlarm : \{True, Flase\} \\
+RepeatTime : \mathbb{Z}
+\where
+SoundAlarm = True \Rightarrow \\
+\hspace{20pt} (AlarmTime == Time) \vee (Repeat == \{True\} \wedge RepeatTime == Time)
+\end{schema}
 
 
 
 
 
 \end{document}
+
