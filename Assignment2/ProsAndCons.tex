@@ -4,25 +4,36 @@
 \begin{document}
 \section{Advantages and disadvantages of the three models}
 
-\subsection{Z notation}
-The Z notation has certain benefits but also drawbacks.
+	\subsection{Problem frames} % (fold)
+	\label{sub:problem_frames}
+
+	The context diagrams of problem frames are a good way of figuring in what context your system is going to operate.
+	Specifically, it helps you identify what external domain entities affect your system, and which internal domain entities are connected or disjoint.
+
+	It can however at times be difficult to stop oneself from thinking about implementation and unintentionally over specify the context diagram.
+
+	The specific problem frames are a good way of illustrating how requirements are referred to in and constrain the parts of the system context diagram.
+
+	% subsection problem_frames (end)
 
 
+	\subsection{Z notation}
+	The Z notation has certain benefits but also drawbacks.
 
-Benefits:
-\vspace{-10pt}
-\begin{itemize}
-	\item You get a better insight in your system by drawing it.
-	\item You realize the current requirements are not done and can add new requirements to improve the existing ones.
-	\item You find global variables you need in the code which you will miss/first discover later
-\end{itemize}
+	Benefits:
+	\vspace{-10pt}
+	\begin{itemize}
+		\item You get a better insight in your system by drawing it.
+		\item You realize the current requirements are not done and can add new requirements to improve the existing ones.
+		\item You find global variables you need in the code which you will miss/first discover later
+	\end{itemize}
 
-Drawbacks:
-\vspace{-10pt}
-\begin{itemize}
-	\item It takes time you could use on other productive task
-	\item It's harder to read than plain text explaining the requirements.
-\end{itemize}
+	Drawbacks:
+	\vspace{-10pt}
+	\begin{itemize}
+		\item It takes time you could use on other productive task
+		\item It's harder to read than plain text explaining the requirements.
+	\end{itemize}
 
 
 \end{document}
