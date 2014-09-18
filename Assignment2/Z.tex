@@ -17,20 +17,16 @@
 % \end{schema}
 
 \begin{schema}{Alarm}
-ON ::= On | Off  \\
-PRJ ::= On | Off \\
-TI ::= Pressed | NotPressed \\
-ALM ::= Pressed | NotPressed \\
-SET ::= Pressed | NotPressed \\
-RPT ::= Repeat | NotRepeat \\
-HH ::= Repeat | NotRepeat \\
-MM ::= Repeat | NotRepeat \\
-Time ::= \mathbb{Z} \\
-AlarmTime ::= \mathbb{Z} \\
-Repeat ::= \{True, Flase\} \\
-ActivateProj : \{ True, False \} \\
-ShowDis : \{ True, False \} \\
-ShowAlm : \{ True, False \}
+ONOFF ::= ON | OFF  \\
+TA ::= TIME | ALARM \\
+TAN ::= SET\_TIME | SET\_ALARM | NONE \\
+Time : \mathbb{Z} \\
+AlarmTime : \mathbb{Z} \\
+Device : ONOFF\\
+Projector : ONOFF \\
+Repeat : ONOFF \\
+Display : TA\\
+DeviceMode : TAN
 \end{schema}
 
 
@@ -43,36 +39,26 @@ ShowAlm : \{ True, False \}
 
 
 \begin{schema}{ToggleProjector} % RE12
-\Delta (PRJ) 
+\Delta (Projector) 
 \where
-ActivateProj' = ActivateProj \cup {PRJ}
+Projector' = if\; Projector = ON\; then\; OFF\; else\; ON 
 \end{schema}
 
 
 \begin{schema}{ShowDisplay} % RE13
-\Delta (TI)
+\Delta (Display)\\
+disp? : TA
 \where
-ShowDis' = ShowDis \cup {TI}
+Display' = disp
 \end{schema}
 
 
-\begin{schema}{ShowDisplay} % RE14
-\Delta (ALM)
+\begin{schema}{ToggleMode} % 
+\Delta (DeviceMode) 
 \where
-ShowAlm' = ShowAlm \cup {ALM}
-\end{schema}
-
-\begin{schema}{SetAlarm} % 
-\Delta (SET, ALM) \\
-canSet : \{True, False\} \\
-pressHH ::= pressed | notPressed \\
-pressMM ::= pressed | notPressed \\
-pressRPT ::= Repeat | notRepeat \\
-\where
-canSet = True \Rightarrow \\
-\hspace{20pt} SET \wedge ALM = pressed \\
-Alarm = pressHH \cup pressMM \\
-Repeat = pressRPT
+Device = ON\\
+DeviceMode' = if\; DeviceMode\; != NONE \; then\; NONE\; else\; \\
+\hspace{20pt} if\; Display == TIME\; then\; SET\_TIME\; else\; SET\_ALARM
 \end{schema}
 
 \begin{schema}{SetTime} % RE15
