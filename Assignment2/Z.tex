@@ -22,6 +22,7 @@ TA ::= TIME | ALARM \\
 TAN ::= SET\_TIME | SET\_ALARM | NONE \\
 Time : \mathbb{Z} \\
 AlarmTime : \mathbb{Z} \\
+SoundAlarm : \{true, false\}\\
 Device : ONOFF\\
 Projector : ONOFF \\
 Repeat : ONOFF \\
@@ -30,18 +31,10 @@ DeviceMode : TAN
 \end{schema}
 
 
-% \begin{schema}{ToggleDevice} % RE11
-% \Delta (ON) \\
-% pressed? : On
-% \where
-% Btn' = Btn \cup {pressed?}
-% \end{schema}
-
-
 \begin{schema}{ToggleProjector} % RE12
 \Delta (Projector) 
 \where
-Projector' = if\; Projector = ON\; then\; OFF\; else\; ON 
+Projector' = if\; Projector == ON\; then\; OFF\; else\; ON 
 \end{schema}
 
 
@@ -56,31 +49,33 @@ Display' = disp
 \begin{schema}{ToggleMode} % 
 \Delta (DeviceMode) 
 \where
-Device = ON\\
+Device == ON\\
 DeviceMode' = if\; DeviceMode\; != NONE \; then\; NONE\; else\; \\
 \hspace{20pt} if\; Display == TIME\; then\; SET\_TIME\; else\; SET\_ALARM
 \end{schema}
 
-\begin{schema}{SetTime} % RE15
-\Delta (SET, ALM) \\
-canSet : \{True, False\} \\
-pressHH ::= pressed | notPressed \\
-pressMM ::= pressed | notPressed \\
-%pressRPT ::= Repeat | notRepeat \\
+\begin{schema}{IncrementSecond}
+\Delta (Time, AlarmTime) \\
 \where
-canSet = True \Rightarrow \\
-\hspace{20pt} SET \wedge ALM = pressed \\
-Time = pressHH \cup pressMM \\
-%Repeat = pressRPT
+DeviceMode\; != NONE\\
+Time' = if\; DeviceMode == SET\_TIME\; then\; Time + 1\; else\; Time\\
+AlarmTime' = if\; DeviceMode == SET\_ALARM\; then\; AlarmTime + 1\; else\; AlarmTime\\
+\end{schema}
+
+\begin{schema}{IncrementHour}
+\Delta (Time, AlarmTime) \\
+\where
+DeviceMode\; != NONE\\
+Time' = if\; DeviceMode == SET\_TIME\; then\; Time + 60\; else\; Time\\
+AlarmTime' = if\; DeviceMode == SET\_ALARM\; then\; AlarmTime + 60\; else\; AlarmTime\\
 \end{schema}
 
 \begin{schema}{SoundAlarm}
-\Delta (Time) \\
-SoundAlarm : \{True, Flase\} \\
-RepeatTime : \mathbb{Z}
+\Delta (SoundAlarm) \\
 \where
-SoundAlarm = True \Rightarrow \\
-\hspace{20pt} (AlarmTime == Time) \vee (Repeat == \{True\} \wedge RepeatTime == Time)
+SoundAlarm' = (Time == AlarmTime) \vee (Repeat == ON \wedge \\
+\hspace{80pt} (Time == AlarmTime + repeatTime\; \vee \\
+\hspace{90pt}Time == AlarmTime + 2*repeatTime))
 \end{schema}
 
 
