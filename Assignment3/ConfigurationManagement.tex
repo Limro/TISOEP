@@ -4,7 +4,7 @@
 \begin{document}
 	\section{Configuration Management} % (fold)
 		\label{sec:configuration_management}
-		For this project it has been chosen to use the Version Control System (VCS) Git.
+		For this project it has been chosen to use the Distributed Concurrent Versions System (DCVS) Git.
 		Git will be used for mantianing a record of all work on the project in a structured manner.
 		A configuration management strategy is needed for the use of Git to have the desired effect.
 
@@ -12,9 +12,11 @@
 
 		A \texttt{master} development branch will be the center of the source code. Here all finished code will be placed, and testing and metrics will be done on this branch.
 		There will note be a \texttt{release} branch, because the nature of the project prohibits incremental release and updates.
-		It will not be allowed to merge code that does not compile and run to \texttt{master} 
+		It will not be allowed to merge code that does not compile and run to \texttt{master}.
+		Likewise, code with known fault may not be merged into \texttt{master} either.
 
-
+		Each software component is developed in a separate branch, named intuitively according to the feature discription.
+		These branches will be merged into \texttt{master} as the features are implemented and unit tested.
 
 	% section configuration_management (end)
 
