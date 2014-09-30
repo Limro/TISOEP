@@ -1,0 +1,31 @@
+%!TEX root = Main_Assignment4.tex
+\documentclass[Main_Assignment4]{subfiles}
+
+\begin{document}
+
+\section{Verification}
+To verify the inner program, a loop invariant is needed. This invariant is shown in listing \ref{lst:LoopInvariant}. 
+
+\begin{lstlisting}[mathescape, caption=Loop invariant, label=lst:LoopInvariant]
+{
+	assert m == m0;
+	int i;
+	assert m == m0;
+	for(i=0; i<k; i++) {
+		m = m + x;
+		invariant (i <= k /\ m == m0 + (x * k));
+	}
+	assert m == m0 + (x * k);
+}
+\end{lstlisting}
+
+
+Loop initialization: substitute i $\leftarrow$ 0 in the invariant:
+\begin{lstlisting}[mathescape, caption=Loop initialization, label=lst:LoopInit]
+(i <= k /\ m == m0 + (x * k))$_{i \leftarrow 0} \iff $ 
+(0 <= k /\ m == m0 + (x * k))  
+\end{lstlisting}
+From listing \ref{lst:LoopInit}, it is easily seen that the program cannot be verified, since it could occur that $k < 0$, and this would break the invariant.
+
+
+\end{document}
