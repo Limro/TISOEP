@@ -4,7 +4,69 @@
 \begin{document}
 
 \section{Unit test case}
+When writing unit test cases it's important not to strive towards verifying the code works, but test \emph{if} it can fail.
 
+Example for this is applying boundary test for the UUT/CUT (Unit Under Test/Code Under Test). 
+
+\begin{lstlisting}[caption=Unit tests -- different k-values, style=Code-C++, label=lst:UUT1]
+[TestFixture]
+public class TestClass
+{
+	int k;
+	int m;
+	int x;
+
+	public funcion() // function to test
+	{
+		int i;
+		for(i=0; i<k; i++) {
+			m = m + x;
+		}
+	}
+
+	[Setup]
+	public void Setup() //Will set the following vaules after each test
+	{
+		m = 2;
+		x = 2;
+	}
+
+	[Test]
+	public void Loop_KEqual_minus1()
+	{
+		k = -1;
+		function();
+		assert.AreEqual(m,0) //m should be 0, but will be 2
+	}
+
+	[Test]
+	public void Loop_KEqual_0()
+	{
+		k = 0;
+		function();
+		assert.AreEqual(m,2) //Works fine
+	}
+
+	[Test]
+	public void Loop_KEqual_1()
+	{
+		k = 1;
+		function();
+		assert.AreEqual(m,4) //Works fine
+	}
+}
+\end{lstlisting}
+
+Beside \codeTitle \ref{lst:UUT1} different scenarios can be constructed, some more plausible than others:
+\begin{itemize}
+	\item \code{x}  is a \code{char} (8-bit) and $x \cdot k$ exceeds 256. This will cause an overflow on \code{x} and return a wrong value to the assertion.
+	\item[] Example: \code{assert 300 = 2 + (2 * 149)}.
+	\item[] Even though m actually has the correct value the assertion will be triggered.
+
+	\item \code{k} is greater than the \code{int}, which causes an overflow in \code{k} and will add \code{x} the wrong number of times.
+
+	\item Both \code{k} and \code{x} are global variables and can, in a threaded system, be changed when the function is running, giving a wrong result.
+\end{itemize}
 
 
 \end{document}
