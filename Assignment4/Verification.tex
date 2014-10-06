@@ -3,7 +3,11 @@
 
 \begin{document}
 
-\section{Verification}
+\section{Problem 1: Verification}
+To verify the projecting alarm clock code, testing, proving or both testing and proving methods could be used. 
+By combining both testing and proving, it is ensured that the code behaves as specified in the specification and that the requirements are fulfilled.
+
+\section{Problem 2 part a}
 To verify the inner program, a loop invariant is needed. 
 This invariant is shown in \codeTitle \ref{lst:LoopInvariant}. 
 
@@ -20,6 +24,8 @@ This invariant is shown in \codeTitle \ref{lst:LoopInvariant}.
 }
 \end{lstlisting}
 
+The loop invariant must hold, during initialization, execution and termination of the loop. In the following Code snippet it will be proved whether the invariant holds for the initialization or not.
+
 
 Loop initialization: substitute i $\leftarrow$ 0 in the invariant:
 \begin{lstlisting}[mathescape, caption=Loop initialization, style=Code-C++, label=lst:LoopInit]
@@ -27,7 +33,8 @@ Loop initialization: substitute i $\leftarrow$ 0 in the invariant:
 (0 <= k /\ m == m0 + (x * k))  
 \end{lstlisting}
 
-From \codeTitle \ref{lst:LoopInit}, it is easily seen that the program cannot be verified, since it could occur that $k < 0$, and this would break the invariant.
+\section{Problem 2 part b}
+From \codeTitle \ref{lst:LoopInit}, it is easily seen that the program cannot be verified, since it could occur that $k < 0$ during the loop initialization, and this would break the invariant.
 
 
 \end{document}
