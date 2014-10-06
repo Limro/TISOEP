@@ -7,7 +7,12 @@
 To verify the projecting alarm clock code, testing, proving or both testing and proving methods could be used. 
 By combining both testing and proving, it is ensured that the code behaves as specified in the specification and that the requirements are fulfilled.
 
-\section{Problem 2 part a}
+\section{Problem 2: Program Fragment} % (fold)
+\label{sec:problem_2_program_fragment}
+
+% section problem_2_program_fragment (end)
+
+\subsection{Part a}
 To verify the inner program, a loop invariant is needed. 
 This invariant is shown in \codeTitle \ref{lst:LoopInvariant}. 
 
@@ -33,7 +38,7 @@ Loop initialization: substitute i $\leftarrow$ 0 in the invariant:
 (0 <= k /\ m == m0 + (x * k))  
 \end{lstlisting}
 
-\section{Problem 2 part b}
+\subsection{Part b}
 From \codeTitle \ref{lst:LoopInit}, it is easily seen that the program cannot be verified, since it could occur that $k < 0$ during the loop initialization, and this would break the invariant.
 
 
