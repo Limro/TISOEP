@@ -7,6 +7,10 @@
 ## Files we use
 ! M_EX_wk*.pdf
 
+## vHistory for latex, build files 
+*.ver
+*.hst
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
