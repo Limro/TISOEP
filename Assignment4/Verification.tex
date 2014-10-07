@@ -16,18 +16,9 @@ By combining both testing and proving, it is ensured that the code behaves as sp
 To verify the inner program, a loop invariant is needed. 
 This invariant is shown in \codeTitle \ref{lst:LoopInvariant}. 
 
-\begin{lstlisting}[mathescape, caption=Loop invariant, style=Code-C++, label=lst:LoopInvariant]
-{
-	assert m == m0;
-	int i;
-	assert m == m0;
-	for(i=0; i<k; i++) {
-		m = m + x;
-		invariant (i <= k /\ m == m0 + (x * k));
-	}
-	assert m == m0 + (x * k);
-}
-\end{lstlisting}
+\lstinputlisting
+[mathescape, caption=Loop invariant, style=Code-C++, label=lst:LoopInvariant]
+{loopInv.cpp}
 
 The loop invariant must hold, during initialization, execution and termination of the loop. In the following Code snippet it will be proved whether the invariant holds for the initialization or not.
 
