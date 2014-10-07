@@ -5,7 +5,7 @@ public class TestClass
 	int m;
 	int x;
 
-	public funcion() // function to test
+	public void function() // function to test
 	{
 		int i;
 		for(i=0; i<k; i++) {
